@@ -5,6 +5,8 @@
 
 Google drive link: https://drive.google.com/open?id=1hPUkdF6yZZ2uZ4no-0SsohxhQZEXsbS1
 
+M5 Software installation instructions: https://github.com/m5stack/M5Stack
+
 Lecture notes and other files will be posted here
 
 #### How to get this code (and other git repositories)
