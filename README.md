@@ -7,6 +7,9 @@ Google drive link: https://drive.google.com/open?id=1hPUkdF6yZZ2uZ4no-0SsohxhQZE
 
 M5 Software installation instructions: https://github.com/m5stack/M5Stack
 
+TEC-Bot 7 Project page: https://idea7.cc/project/tec-bot-7-0/
+Includes a cool 3D model of the kit as well as assembly instructions
+
 Lecture notes and other files will be posted here
 
 #### How to get this code (and other git repositories)
