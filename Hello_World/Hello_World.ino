@@ -5,7 +5,6 @@
 #define NUM_LEDS 7
 CRGB leds[NUM_LEDS];
 
-
 void setup() {
   M5.begin();   //This line should be at the beginning of every program
 
