@@ -23,7 +23,7 @@ void loop() {
   
   delay(500);
 
-  M5.Lcd.setTextColor(RED, BLACK);
+  M5.Lcd.setTextColor(GREEN, BLACK);
   M5.Lcd.setCursor(0,0);
   M5.Lcd.print("Hello world!");
 
