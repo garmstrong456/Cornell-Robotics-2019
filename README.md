@@ -14,6 +14,8 @@ Includes a cool 3D model of the kit as well as assembly instructions
 
 FastLED reference: https://github.com/FastLED/FastLED/wiki/Pixel-reference
 
+Robot Motor Sizing Tutorial: https://www.robotshop.com/blog/en/drive-motor-sizing-tutorial-3661
+
 #### How to get this code (and other git repositories)
 If you're comfortable with Git the best way to keep up to date with this code is to clone the repository. Follow the instructions here:
 [Cloning a Repository](https://help.github.com/articles/cloning-a-repository/).
