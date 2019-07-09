@@ -16,25 +16,29 @@
 
 // The FastLED library is used instead of the Neopixel library because the Neopixel library conflicts with the m5Stack library somehow
 
-// This example makes the robot back up 7 revolutions and then drive forward quickly 7 revolutions...then repeat.
+// This example makes the robot back up 4 revolutions and then drive forward quickly 4 revolutions...then repeat.
 
 #include <M5Stack.h>
 #include "FastLED.h"
 
+//LED definitions
 #define Neopixel_PIN 1
 #define NUM_LEDS 7
-
 CRGB leds[NUM_LEDS];
 
+//Motor definitions
+//Max dash speed is about 64000 ticks/min
 int dashSpeed = 20000; //medium
 int backingSpeed = 10000; //slow
 int driveDistance = 400; //positive numbers are FWD. 100 = 1 full revolution
-int pauseTime = 3000;
+int pauseTime = 3000; //delay between the start of drive commands
 
 
 void setup() 
 {
-  M5.begin();
+  M5.begin();   //Call this first every time
+  
+  //Set up the LCD screen
   M5.Lcd.clear(BLACK);
   M5.Lcd.setTextColor(CYAN); M5.Lcd.setTextSize(2); M5.Lcd.setCursor(40, 0);
   M5.Lcd.println("Simple Drive");
@@ -50,9 +54,10 @@ void setup()
   M5.Lcd.println("- Repeat.");
 
   // Neopixel initialization
-  FastLED.addLeds<WS2811,Neopixel_PIN,GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+  FastLED.addLeds<WS2811,Neopixel_PIN,RGB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(10);
 
+  //Initialize communication with the Nano
   // Serial2.begin(unsigned long baud, uint32_t config, int8_t rxPin, int8_t txPin, bool invert)
   Serial2.begin(115200, SERIAL_8N1, 16, 17);
   
@@ -66,14 +71,10 @@ void loop()
   fill_solid(leds, NUM_LEDS, CRGB::Green);
   FastLED.show();
 
-  //Send the drive forward command to Grbl
-  //$J  : jog command
-  //G21 : set units to mm
-  //G91 : set motion to relative (ie move x units from current position)
-  //X   : X axis distance (100 = 1 full revolution)
-  //Y   : Y axis distance (100 = 1 full revolution)
-  //F   : feed rate (units/minute)
-  setDrive(driveDistance, driveDistance, dashSpeed);
+  //Send the drive forward command
+  //driveDistance: 100 = 1 full rotation
+  //speed: units/minute (0 - 64000)
+  setDrive(10000, 10000, dashSpeed);
 
   delay(pauseTime);
 
@@ -82,11 +83,11 @@ void loop()
   FastLED.show();
 
   //Send the back up command
-  setDrive(-driveDistance, -driveDistance, backingSpeed);
+  setDrive(-10000, -10000, backingSpeed);
   delay(2*pauseTime);
-}  
+}
 
 void setDrive(int Xdistance, int Ydistance, int rate) {
-  Serial2.printf("$J = G21 G91 X%d Y%d F%d", Xdistance, Ydistance, rate);
-  Serial2.print("\r\n\r\n");
+  Serial2.printf("S1 %6d\r", Xdistance);
+  Serial2.printf("S2 %6d\r", Ydistance);
 }
