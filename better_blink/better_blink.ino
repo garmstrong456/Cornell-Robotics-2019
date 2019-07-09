@@ -11,6 +11,7 @@ const int blinkPeriod = 500, blinkPeriod2 = 200;
 
 void loop() {
   if (millis() > lastBlinkTime + blinkPeriod) {   //ready for a new blink
+    lastBlinkTime = millis();
     M5.Lcd.setCursor(25,25);
     if (blinkState) {
       M5.Lcd.setTextColor(WHITE, BLACK);
@@ -23,6 +24,7 @@ void loop() {
   }
 
   if (millis() > lastBlinkTime2 + blinkPeriod2) {   //ready for a new blink
+    lastBlinkTime = millis();
     M5.Lcd.setCursor(25,50);
     if (blinkState2) {
       M5.Lcd.setTextColor(WHITE, BLACK);
