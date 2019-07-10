@@ -18,9 +18,15 @@
 //"P2"               Ask for the position of motor2
 
 #include <AccelStepper.h>
+#include <NewPing.h>
 
 AccelStepper motor1(AccelStepper::DRIVER, 2, 5);     //X axis from Grbl
 AccelStepper motor2(AccelStepper::DRIVER, 3, 6);     //Y axis from Grbl
+
+#define TRIG_PIN 9
+#define ECHO_PIN 10
+#define MAX_DISTANCE 200
+NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE);
 
 int stepConversion = 8;     //used to convert Grbl units to AccelStepper units
                             //for continuity with GrblForBots
@@ -84,6 +90,9 @@ void loop() {
         }
         else if (commandBase == "P2") {
             Serial.println(motor2.currentPosition());
+        }
+        else if (commandBase == "UU") {
+            Serial.println(sonar.ping_cm());
         }
         lastCommand = "";   //Reset the command string for the next command
     }
