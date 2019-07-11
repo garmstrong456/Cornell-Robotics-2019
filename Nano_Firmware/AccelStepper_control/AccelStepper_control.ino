@@ -58,16 +58,42 @@ void loop() {
 
         //Set speed on both motors
         if      (commandBase == "SS") {
-            motor1.setSpeed(lastCommand.substring(3,9).toInt()*stepConversion/60);
-            motor2.setSpeed(lastCommand.substring(10).toInt()*stepConversion/60);
+            int speed1 = lastCommand.substring(3,9).toInt()*stepConversion/60;
+            int speed2 = lastCommand.substring(10).toInt()*stepConversion/60;
+            motor1.setSpeed(speed1);
+            motor2.setSpeed(speed2);
+            if (speed1 == 0) {
+              motor1.disableOutputs();
+            } else {
+              motor1.enableOutputs();
+            }
+            if (speed2 == 0) {
+              motor2.disableOutputs();
+            } else {
+              motor2.enableOutputs();
+            }
+            motor1.setSpeed(speed1);
+            motor2.setSpeed(speed2);
         }
 
         //Set speed on one motor
         else if (commandBase == "S1") {
-            motor1.setSpeed(lastCommand.substring(3).toInt()*stepConversion/60);
+            int speed1 = lastCommand.substring(3).toInt()*stepConversion/60;
+            motor1.setSpeed(speed1);
+            if (speed1 == 0) {
+              motor1.disableOutputs();
+            } else {
+              motor1.enableOutputs();
+            }
         }
         else if (commandBase == "S2") {
-            motor2.setSpeed(lastCommand.substring(3).toInt()*stepConversion/60);
+            int speed2 = lastCommand.substring(3).toInt()*stepConversion/60;
+            if (speed2 == 0) {
+              motor2.disableOutputs();
+            } else {
+              motor2.enableOutputs();
+            }
+            motor2.setSpeed(speed2);
         }
 
         //Set acceleration
